@@ -3,52 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organic Farmer - 100% Pure & Fresh</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Organic Farming CEP - SPPU Student Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f4;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .sppu-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: #c8e6c9;
+            margin-top: 4px;
+        }
+
+        /* Campus Image Section */
+        .campus-img-container {
+            text-align: center;
+            padding: 15px;
+            background: #ffffff;
+        }
+
+        .campus-img {
+            width: 100%;
+            max-width: 750px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        /* Hero Buttons */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+
+        .btn-gallery {
+            background-color: #ff9800;
+        }
+
+        .btn-gallery:hover {
+            background-color: #e68a00;
+        }
+
+        .btn:hover {
+            background-color: #388e3c;
+        }
+
+        /* Container & Cards */
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1b5e20;
+            margin: 30px 0 20px 0;
+            font-size: 22px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid #4caf50;
+        }
+
+        .card h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Gallery Pop-Up Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            overflow-y: auto;
+            padding: 40px 15px;
+        }
+
+        .modal-body {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-card p {
+            padding: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #2e7d32;
+            background: #f9f9f9;
+        }
+
+        /* Info & CEP Section */
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+
+        .cep-box {
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Products List */
+        .products {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .products ul {
+            list-style-type: none;
+            font-size: 16px;
+        }
+
+        .products li {
+            padding: 10px 0;
+            border-bottom: 1px solid #c8e6c9;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact button {
+            width: 100%;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Team Section */
+        .team {
+            background: #2e7d32;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header / Navbar -->
+    <!-- Header Section -->
     <header>
-        <div class="logo">🌱 Organic Farmer</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#products">Products</a>
-            <a href="#contact">Contact</a>
-        </nav>
+        <div class="sppu-badge">🎓 Savitribai Phule Pune University (SPPU)</div>
+        <h1>🌱 Organic Farming Community Project</h1>
+        <p>Samarth College of Engineering, Belhe | SE Mechanical</p>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h1>ताजी आणि ऑरगॅनिक फळे व भाज्या!</h1>
-        <p> थेट शेतातून तुमच्या घरापर्यंत - 100% रसायनमुक्त आणि नैसर्गिक.</p>
-        <button class="btn">आत्ताच खरेदी करा</button>
-    </section>
+    <!-- College Campus Photo -->
+    <div class="campus-img-container">
+        <img src="college.jpg" alt="समर्थ शैक्षणिक संकुल, बेल्हे" class="campus-img">
+    </div>
 
-    <!-- Products Section -->
-    <section id="products" class="products">
-        <h2>आमची उत्पादने (Our Products)</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <h3>🥦 सेंद्रिय भाज्या</h3>
-                <p>ताजी, हिरवी आणि पौष्टिक सेंद्रिय भाजीपाला.</p>
-            </div>
-            <div class="product-card">
-                <h3>🍎 सेंद्रिय फळे</h3>
-                <p>केमिकल-मुक्त नैसर्गिक गोड फळे.</p>
-            </div>
-            <div class="product-card">
-                <h3>🌾 नैसर्गिक धान्य</h3>
-                <p>शुद्ध आणि पॉलिश नसलेले उत्तम धान्य.</p>
-            </div>
+    <!-- Hero Banner with Buttons -->
+    <section class="hero">
+        <h2>सेंद्रिय शेती आणि डिजिटल विकास</h2>
+        <p>विषमुक्त शेती, सुदृढ समुदाय व शाश्वत तंत्रज्ञान</p>
+        
+        <div class="btn-group">
+            <button class="btn btn-gallery" onclick="openGallery()">📸 View Gallery (फोटो गॅलरी)</button>
+            <a href="#contact" class="btn">📩 संपर्क व चौकशी</a>
         </div>
     </section>
 
-    <!-- Footer -->
+    <div class="container">
+
+        <!-- CEP Project Aim -->
+        <div class="cep-box">
+            <h3>📌 Community Engagement Project (CEP) Objective:</h3>
+            <p>स्थानिक सेंद्रिय शेतकऱ्यांना डिजिटल प्लॅटफॉर्म मिळवून देणे, ग्राहकांपर्यंत थेट सेंद्रिय उत्पादने पोहोचवणे आणि सेंद्रिय शेतीतील तंत्रज्ञानाचा प्रसार करणे हा या प्रोजेक्टचा मुख्य उद्देश आहे.</p>
+        </div>
+        
+        <!-- About Farm Section -->
+        <h2 class="section-title">👨‍🌾 शेताविषयी माहिती (Local Organic Farm)</h2>
+        <div class="info-box">
+            <p><b>शेताचे नाव:</b> निसर्ग सेंद्रिय शेतफार्म</p>
+            <p><b>ठिकाण:</b> बेल्हे, जुन्नर (पुणे)</p>
+            <p><b>वैशिष्ट्य:</b> संपूर्ण सेंद्रिय पद्धतीने भाजीपाला आणि फळांचे उत्पादन घेतले जाते.</p>
+        </div>
+
+        <!-- Mechanical Engineering Aspect -->
+        <h2 class="section-title">⚙️ Mechanical Engineering in Organic Farming</h2>
+        <div class="card-grid">
+            <div class="card" style="border-top-color: #0288d1;">
+                <h3>🚜 Solar Sprayer</h3>
+                <p>सौर ऊर्जेवर चालणारा सेंद्रिय औषध फवारणी पंप (Zero Pollution).</p>
+            </div>
+            <div class="card" style="border-top-color: #0288d1;">
+                <h3>🍂 Compost Shredder</h3>
+                <p>शेतातील कचऱ्यापासून गांडूळ खत बनवण्यासाठी पालापाचोळा बारीक करणारे मशीन.</p>
+            </div>
+            <div class="card" style="border-top-color: #0288d1;">
+                <h3>☀️ Solar Dryer</h3>
+                <p>सेंद्रिय माल दीर्घकाळ टिकवण्यासाठी सौर ऊर्जेचा वापर करून वाळवणारे यंत्र.</p>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <h2 class="section-title">🥦 उपलब्ध सेंद्रिय माल (Products)</h2>
+        <div class="products">
+            <ul>
+                <li>🥦 ताजी सेंद्रिय भाजीपाला (Organic Vegetables)</li>
+                <li>🍎 रासायनिक खतमुक्त फळे (Fresh Fruits)</li>
+                <li>🌾 गावरान धान्य आणि डाळी (Natural Grains)</li>
+                <li>🥛 शुद्ध देशी गायीचे दूध व तूप (A2 Milk & Ghee)</li>
+            </ul>
+        </div>
+
+        <!-- Contact Form -->
+        <h2 class="section-title">📩 संपर्क व मागणी फॉर्म</h2>
+        <div class="contact" id="contact">
+            <form action="#">
+                <input type="text" placeholder="तुमचे नाव (Name)" required>
+                <input type="text" placeholder="मोबाईल नंबर (Phone)" required>
+                <textarea rows="3" placeholder="तुम्हाला कोणती सेंद्रिय उत्पादने हवी आहेत?"></textarea>
+                <button type="submit">Submit (पाठवा)</button>
+            </form>
+        </div>
+
+        <!-- Project Team Details -->
+        <div class="team">
+            <h3>👨‍💻 प्रोजेक्ट सादरकर्ते (Student Team)</h3>
+            <p style="margin-top:8px;"><b>विद्यार्थी:</b> रोहित खैरणार व सहकारी</p>
+            <p><b>शाखा:</b> SE Mechanical Engineering</p>
+            <p><b>विषय:</b> Community Engagement Project (CEP - Topic 15)</p>
+            <p><b>कॉलेज:</b> Samarth College of Engineering, Belhe</p>
+        </div>
+
+    </div>
+
+    <!-- Photo Gallery Modal (Pop-up Window) -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-body">
+            <span class="close-btn" onclick="closeGallery()">&times;</span>
+            <h2 style="text-align: center; color: #1b5e20;">📸 शेत भेट आणि फोटो गॅलरी</h2>
+            <p style="text-align: center; font-size: 13px; color: #666; margin-bottom: 15px;">Field Visit Photos</p>
+            
+            <div class="gallery-grid">
+                <!-- फोटो १ -->
+                <div class="gallery-card">
+                    <img src="farm1.jpg" alt="शेतातील फोटो १">
+                    <p>🌿 सेंद्रिय पिके व पाहणी</p>
+                </div>
+                <!-- फोटो २ -->
+                <div class="gallery-card">
+                    <img src="farm2.jpg" alt="शेतातील फोटो २">
+                    <p>🪱 गांडूळ खत व निर्मिती</p>
+                </div>
+                <!-- फोटो ३ -->
+                <div class="gallery-card">
+                    <img src="farm3.jpg" alt="शेतातील फोटो ३">
+                    <p>👨‍🌾 शेतकऱ्यांशी चर्चा</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
     <footer>
-        <p>&copy; 2026 Organic Farmer. All rights reserved.</p>
+        <p>© SPPU CEP Project | Samarth College of Engineering, Belhe</p>
     </footer>
+
+    <!-- JavaScript For Gallery Pop-up -->
+    <script>
+        function openGallery() {
+            document.getElementById("galleryModal").style.display = "block";
+        }
+
+        function closeGallery() {
+            document.getElementById("galleryModal").style.display = "none";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById("galleryModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
